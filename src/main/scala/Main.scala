@@ -1,4 +1,8 @@
 @main def f: Unit =
+  println(parseString("{")("{}"))
+  println(zip(parseString("{"), parseString("}"))("{}"))
+  println(parseRangeQuantifier("{1,3}"))
+  
   val nfa = NFA()
   nfa.addState("q0")
   nfa.addState("q1")
@@ -14,4 +18,4 @@
   println(nfa.compute("abbbbbb")); // True
   println(nfa.compute("aabbbbbb")); // False
   println(nfa.compute("ab")); // True
-  println(nfa.compute("a"));
+  println(nfa.compute("a")); // False

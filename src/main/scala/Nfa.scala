@@ -44,12 +44,12 @@ class NFA {
         .filter((matcher, toState) =>
           matcher.matches(input) &&
           !(matcher.isEpsilon && memory.epsilonVisited.contains(toState.name)))
-    transitionsToExecute.exists((matcher, toState) =>
+    transitionsToExecute.exists((matcher, newState) =>
       val newMemory = memory.copy(
         epsilonVisited = if matcher.isEpsilon then Vector[String]()
-        else memory.epsilonVisited :+ toState.name)
-      val toPosition = position + (if matcher.isEpsilon then 0 else 1)
-      val nextFrame = (toPosition, toState)
+        else memory.epsilonVisited :+ newState.name)
+      val newPosition = position + (if matcher.isEpsilon then 0 else 1)
+      val nextFrame = (newPosition, newState)
       dfs(stringView, nextFrame, newMemory)
     )
 
